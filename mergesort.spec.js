@@ -1,5 +1,5 @@
 function randomArray(length) {
-  a = [];
+  var a = [];
   for (var i=0; i<length; i++) {
     var num = Math.floor(Math.random() * (100 - 1) + 1);
     a.push(num);
@@ -7,13 +7,23 @@ function randomArray(length) {
   return a;
 }
 
-describe('Merge Sort Helper', function(){
+describe('Split Array function', function() {
+  it('is able to split an odd-numbered array into two halves', function() {
+    expect( split([1,2,3,4,5]) ).toEqual([[1,2,3],[4,5]]);
+  });
+
+  it('is able to split an even-numbered array into two halves', function() {
+    expect( split([1,2,3,4]) ).toEqual([[1,2],[3,4]]);
+  });
+});
+
+describe('Merge', function(){
   it('merges two sorted arrays and returns sorted array', function(){
-    expect( mergeSortHelper([1,2],[3,4]) ).toEqual( [1,2,3,4] );
+    expect( merge([1,2],[3,4]) ).toEqual( [1,2,3,4] );
   });
 
   it('handles an empty array, returns the non-empty array', function(){
-    expect( mergeSortHelper([1,2,3,4],[]) ).toEqual( [1,2,3,4] );
+    expect( merge([1,2,3,4],[]) ).toEqual( [1,2,3,4] );
   });
 
   it('handles two large, random, sorted array', function(){
@@ -24,9 +34,9 @@ describe('Merge Sort Helper', function(){
       'random1',random1,
       'random2',random2,
       'answer',answer,
-      'mergeSortHelper(random1,random2)',mergeSortHelper(random1,random2)
+      'merge(random1,random2)',merge(random1,random2)
     );
-    expect( mergeSortHelper(random1,random2) ).toEqual( answer );
+    expect( merge(random1,random2) ).toEqual( answer );
   });
 })
 
@@ -37,6 +47,10 @@ describe('Merge Sort', function(){
 
   it('handles a singleton array', function(){
     expect( mergeSort([1]) ).toEqual( [1] );
+  });
+
+  it('handles an array of 2', function(){
+    expect( mergeSort([2,1]) ).toEqual( [1,2] );
   });
 
   it('handles an array already sorted', function(){
@@ -57,6 +71,6 @@ describe('Merge Sort', function(){
 
   it('handles a large, random array', function(){
     var random = mergeSort(randomArray(51));
-    expect( random ).toEqual( random.sort() );
+    expect( random ).toEqual( bubbleSort(random) );
   });
 });
