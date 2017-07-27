@@ -32,12 +32,45 @@ const merge = (b_arg,c_arg) => {
   var d = [];
   while (b.length || c.length) {
     if (b[0] < c[0] || !c.length) {
-      d.push(b[0])
+      d.push(b[0]);
       b.shift();
     } else {
-      d.push(c[0])
+      d.push(c[0]);
       c.shift();
     }
   }
   return d;
+}
+
+// The basic idea here is to merge the two arrays without using shift or slice
+// We'll loop through the first array and push the smaller element onto d, and
+// record the larger on in a temp variable. In following iterations of the loop,
+// compare with the temp variable, as well as the elements of the list, pushing
+// the smallest element onto d. Return d.
+const mergeUnstable = (b,c) => {
+  var d = [];
+  var temp = null; // Stores values that aren't ready to be sorted
+  for (var i=0; i<b.length; null) {
+
+    // temp is not set
+    if (temp === null) {
+      if (b[0] < c[0]) {
+        d.push(b[0]);
+        temp = [c[0], 'c'];
+      } else {
+        d.push(c[0]);
+        temp = [b[0], 'b'];
+      }
+
+    // temp is set
+    } else {
+      if (b[i] < temp) {
+        d.push(b[i]);
+        temp = [c[0], 'c'];
+      } else {
+
+      }
+    }
+    i++;
+  }
 }
